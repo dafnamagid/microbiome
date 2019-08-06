@@ -1,0 +1,4 @@
+train_auc: 0.5040650406504065
+test_auc: 0.5
+train_rho: 0.08707343994511714
+test_rho: nan

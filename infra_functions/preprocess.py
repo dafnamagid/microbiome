@@ -19,7 +19,10 @@ def preprocess_data(data, preform_z_scoring=True, preform_log=True, preform_taxn
         visualize_preproccess(data_frame_for_vis, indexes_of_non_zeros, 'Before Taxonomy group', [321, 322])
 
     if preform_taxnomy_group:
-        taxonomy_reduced = as_data_frame[taxonomy_col].map(lambda x: x.split(';'))
+        if type(as_data_frame[taxonomy_col][0]) is int:
+            taxonomy_reduced = as_data_frame[taxonomy_col][1:].map(lambda x: x.split(';'))
+        else:
+            taxonomy_reduced = as_data_frame[taxonomy_col].map(lambda x: x.split(';'))
         taxonomy_reduced = taxonomy_reduced.map(lambda x: ';'.join(x[:taxnomy_level]))
         as_data_frame[taxonomy_col] = taxonomy_reduced
         as_data_frame = as_data_frame.groupby(as_data_frame[taxonomy_col]).mean()
